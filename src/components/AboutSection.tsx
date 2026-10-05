@@ -149,7 +149,7 @@ export const AboutSection: React.FC = () => {
             <div className="rounded-2xl border border-white/10 bg-[#121419] p-6 sm:p-8 flex flex-col justify-between">
               <div>
                 <div className="flex items-start justify-between">
-                  <div className="h-14 w-14 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 font-display font-extrabold text-xl">
+                  <div className="h-14 w-14 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 font-display font-extrabold text-xl shadow-inner shadow-amber-400/10">
                     ML
                   </div>
                   <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded-md">
@@ -185,7 +185,7 @@ export const AboutSection: React.FC = () => {
             <div className="rounded-2xl border border-white/10 bg-[#121419] p-6 sm:p-8 flex flex-col justify-between">
               <div>
                 <div className="flex items-start justify-between">
-                  <div className="h-14 w-14 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 font-display font-extrabold text-xl">
+                  <div className="h-14 w-14 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 font-display font-extrabold text-xl shadow-inner shadow-amber-400/10">
                     AA
                   </div>
                   <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded-md">

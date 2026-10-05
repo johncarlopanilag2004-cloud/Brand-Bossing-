@@ -58,6 +58,16 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ onOpenBooking }) => {
                 alt={currentCase.businessName}
                 className="h-full w-full object-cover"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  if (currentCase.id === 'cafe-case-study') {
+                    target.src = 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80';
+                  } else if (currentCase.id === 'delicacy-case-study') {
+                    target.src = 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=1200&q=80';
+                  } else {
+                    target.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80';
+                  }
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#111317] via-transparent to-transparent lg:hidden" />
               

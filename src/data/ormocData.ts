@@ -1,6 +1,10 @@
 import { ServiceItem, CaseStudyItem, AuditQuestion } from '../types';
+import heroImg from '../assets/images/hero_agency_ormoc_1791167368030.jpg';
+import cafeImg from '../assets/images/case_study_cafe_1791167383697.jpg';
+import productImg from '../assets/images/case_study_product_1791167396742.jpg';
+import resortImg from '../assets/images/case_study_resort_1791167408245.jpg';
 
-export const HERO_IMAGE = '/src/assets/images/hero_agency_ormoc_1791167368030.jpg';
+export const HERO_IMAGE = heroImg || '/images/hero_agency_ormoc_1791167368030.jpg';
 
 export const AGENCY_STATS = [
   { value: '₱18.4M+', label: 'Client Revenue Tracked', sub: 'Across 45+ Ormoc MSMEs' },
@@ -150,7 +154,7 @@ export const CASE_STUDIES: CaseStudyItem[] = [
     businessName: 'Centro Bean & Bloom',
     location: 'Real Street, Ormoc Centro',
     industry: 'Specialty Cafe & Artisanal Bakery',
-    image: '/src/assets/images/case_study_cafe_1791167383697.jpg',
+    image: cafeImg || '/images/case_study_cafe_1791167383697.jpg',
     challenge: 'Facing intense competition from national chain outlets, this cozy homegrown cafe was struggling with slow weekday afternoons and lack of visibility for their signature handcrafted pineapple pastries.',
     solution: 'We revamped their Google Maps profile with professional appetizing photography, launched weekly TikTok behind-the-scenes reels showing the morning baking process, and ran a targeted 3-kilometer radius "Midday Coffee Break" ad campaign on Facebook.',
     metrics: [
@@ -170,7 +174,7 @@ export const CASE_STUDIES: CaseStudyItem[] = [
     businessName: 'Isla Reina Delicacies',
     location: 'Barangay Cogon, Ormoc City',
     industry: 'Agri-Product & Pasalubong Packaging',
-    image: '/src/assets/images/case_study_product_1791167396742.jpg',
+    image: productImg || '/images/case_study_product_1791167396742.jpg',
     challenge: 'Producing world-class sweet pineapple tarts and jams, but packaged in basic plastic wraps that made it difficult to sell in high-end specialty stores or online marketplaces.',
     solution: 'Engineered a cohesive luxury packaging box celebrating Ormoc’s pineapple heritage, built an express online order catalog, and conducted a targeted campaign targeting Ormocanons working overseas (OFWs) sending pasalubong home.',
     metrics: [
@@ -190,7 +194,7 @@ export const CASE_STUDIES: CaseStudyItem[] = [
     businessName: 'Lake Danao Haven Retreat',
     location: 'Lake Danao Natural Park, Ormoc',
     industry: 'Eco-Tourism & Cabin Stays',
-    image: '/src/assets/images/case_study_resort_1791167408245.jpg',
+    image: resortImg || '/images/case_study_resort_1791167408245.jpg',
     challenge: 'While weekends were occasionally booked, weekday occupancies averaged under 18% due to clunky manual SMS reservations and low awareness among Cebu travelers taking fast ferries.',
     solution: 'Produced stunning cinematic drone and 4K reels showcasing morning mist over Lake Danao, automated instant Messenger booking calendar confirmations, and ran geo-targeted ads to Cebu professionals looking for weekend getaways.',
     metrics: [
