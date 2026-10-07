@@ -61,6 +61,7 @@ export const AuditTool: React.FC<AuditToolProps> = ({ onCompleteAudit }) => {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
             <span>Free Diagnostic Tool</span>
             <span aria-hidden="true" className="text-white/30">·</span>
             <span>Self-Assessment</span>

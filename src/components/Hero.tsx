@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, MapPin, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, MapPin, Sparkles, TrendingUp, Zap } from 'lucide-react';
 import { HERO_IMAGE, AGENCY_STATS } from '../data/ormocData';
 
 interface HeroProps {
@@ -43,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
             {/* Subtitle */}
             <p className="mt-6 text-base sm:text-lg text-neutral-300 leading-relaxed font-body">
-              Stop losing customers to national franchises or relying only on chance foot traffic. We engineer hyper-local Facebook & Instagram campaigns, Google Maps #1 rankings, and shelf-ready branding tailored for Ormocanons.
+              Stop losing customers to national franchises or relying only on chance foot traffic. We engineer hyper-local Facebook & Instagram campaigns and shelf-ready branding tailored for Ormocanons.
             </p>
 
             {/* Key Value Deliverables checklist */}
@@ -132,8 +132,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
 
         {/* Claim-to-Proof Adjacency: Quantitative Stats Bar */}
         <div className="mt-16 sm:mt-24 border-t border-white/10 pt-10">
-          <p className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
-            Real outcomes delivered for businesses across Ormoc & Leyte:
+          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neutral-400">
+            <TrendingUp className="h-4 w-4 text-amber-400" />
+            <span>Real outcomes delivered for businesses across Ormoc & Leyte:</span>
           </p>
           <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-4 lg:gap-8">
             {AGENCY_STATS.map((stat, idx) => (

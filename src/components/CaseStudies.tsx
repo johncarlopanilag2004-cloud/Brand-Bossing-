@@ -17,6 +17,7 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ onOpenBooking }) => {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+              <TrendingUp className="h-3.5 w-3.5 text-amber-400" />
               <span>Proof of Impact</span>
               <span aria-hidden="true" className="text-white/30">·</span>
               <span>Documented Ormoc MSME Case Studies</span>

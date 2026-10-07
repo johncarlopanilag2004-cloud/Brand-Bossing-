@@ -1,5 +1,6 @@
 import React from 'react';
 import { Target, HeartHandshake, Award, MapPin, Users, Sparkles } from 'lucide-react';
+import { AGENCY_LEADERSHIP } from '../data/ormocData';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -9,6 +10,7 @@ export const AboutSection: React.FC = () => {
           {/* Left: Agency Story & Mission */}
           <div className="lg:col-span-6 space-y-6">
             <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+              <Sparkles className="h-3.5 w-3.5 text-amber-400" />
               <span>About Brand|Bossing</span>
               <span aria-hidden="true" className="text-white/30">·</span>
               <span>Our Story in Ormoc City</span>
@@ -127,95 +129,97 @@ export const AboutSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Executive Leadership: Mark G. Lonzaga & Alchie M. Ayod */}
+        {/* Executive Leadership: Ranked Hierarchy from CEO to C-Suite */}
         <div className="mt-20 border-t border-white/10 pt-16">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
               <Users className="h-3.5 w-3.5" />
-              <span>Agency Leadership</span>
+              <span>Agency Leadership Hierarchy</span>
               <span aria-hidden="true" className="text-white/30">·</span>
-              <span>Executive Co-CEOs</span>
+              <span>Executive Ranks</span>
             </div>
             <h3 className="mt-3 text-2xl sm:text-3xl font-bold font-display text-white">
-              Meet the Founders Behind Brand|Bossing.
+              Executive Leadership Team.
             </h3>
             <p className="mt-2 text-sm text-neutral-400 leading-relaxed font-body">
-              Rooted in Leyte with a fierce passion for local enterprise growth, our executive team works directly with Ormoc business owners to build profitable, enduring local brands.
+              Ranked from our Chief Executive Officer down through C-suite leadership, each director oversees a critical pillar of your business's growth in Ormoc City and Region 8.
             </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2">
-            {/* CEO 1: Mark G. Lonzaga */}
-            <div className="rounded-2xl border border-white/10 bg-[#121419] p-6 sm:p-8 flex flex-col justify-between">
-              <div>
-                <div className="flex items-start justify-between">
-                  <div className="h-14 w-14 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 font-display font-extrabold text-xl shadow-inner shadow-amber-400/10">
-                    ML
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
+            {AGENCY_LEADERSHIP.map((leader) => (
+              <div
+                key={leader.name}
+                className={`rounded-2xl border p-6 sm:p-8 flex flex-col justify-between transition-all ${
+                  leader.rank === 1
+                    ? 'border-amber-400/40 bg-[#14161d] shadow-lg shadow-amber-400/5 ring-1 ring-amber-400/20'
+                    : 'border-white/10 bg-[#121419] hover:border-amber-400/30'
+                }`}
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-3">
+                    {leader.image ? (
+                      <div className="relative">
+                        <img
+                          src={leader.image}
+                          alt={`${leader.name} - ${leader.role}`}
+                          className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl object-cover object-top border-2 border-amber-400/40 shadow-lg shadow-amber-400/10"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full bg-amber-400 border-2 border-[#121419] flex items-center justify-center text-[10px] font-bold text-black">
+                          ✓
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={`h-14 w-14 rounded-xl flex items-center justify-center font-display font-extrabold text-xl shadow-inner ${
+                        leader.rank === 1
+                          ? 'bg-amber-400/15 border-2 border-amber-400/40 text-amber-400 shadow-amber-400/20'
+                          : 'bg-white/5 border border-white/15 text-neutral-200'
+                      }`}>
+                        {leader.initials}
+                      </div>
+                    )}
+                    
+                    <div className="flex flex-col items-end gap-1.5">
+                      <span className={`text-[10px] font-mono font-bold tracking-wider px-2 py-0.5 rounded ${
+                        leader.rank === 1
+                          ? 'text-neutral-950 bg-amber-400 font-extrabold shadow-sm'
+                          : 'text-amber-400 bg-amber-400/10 border border-amber-400/20'
+                      }`}>
+                        RANK 0{leader.rank} {leader.rank === 1 && '· TOP EXECUTIVE'}
+                      </span>
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded text-right">
+                        {leader.rank === 1 ? 'CEO' : leader.rank === 2 ? 'COO' : leader.rank === 3 ? 'CTO' : 'CGO'}
+                      </span>
+                    </div>
                   </div>
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded-md">
-                    Co-CEO & Chief Strategist
-                  </span>
+
+                  <div className="mt-5">
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-xl font-bold font-display text-white">
+                        {leader.name}
+                      </h4>
+                    </div>
+                    <div className="text-xs font-semibold text-amber-300 mt-1">
+                      {leader.role}
+                    </div>
+                  </div>
+
+                  <p className="mt-4 text-xs sm:text-sm text-neutral-300 leading-relaxed font-body">
+                    {leader.bio}
+                  </p>
+
+                  <div className="mt-5 border-t border-white/5 pt-4 text-xs text-neutral-400 italic">
+                    "{leader.quote}"
+                  </div>
                 </div>
 
-                <div className="mt-5">
-                  <h4 className="text-xl font-bold font-display text-white">
-                    Mark G. Lonzaga
-                  </h4>
-                  <div className="text-xs font-semibold text-amber-300 mt-0.5">
-                    Co-Chief Executive Officer
-                  </div>
-                </div>
-
-                <p className="mt-4 text-xs sm:text-sm text-neutral-300 leading-relaxed font-body">
-                  Specializing in market positioning, paid advertising funnels, and revenue architecture. Mark oversees growth strategy, client profitability audits, and ensures every Ormoc business partnered with Brand|Bossing achieves tangible return on ad spend.
-                </p>
-
-                <div className="mt-5 border-t border-white/5 pt-4 text-xs text-neutral-400 italic">
-                  "Our goal is simple: make our homegrown Ormoc businesses the undisputed first choice for locals and visiting tourists alike."
+                <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400">
+                  <span>Focus: {leader.focus}</span>
+                  <span className="text-amber-400 font-medium">Ormoc City, Leyte</span>
                 </div>
               </div>
-
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400">
-                <span>Focus: Strategic ROI & Local SEO</span>
-                <span className="text-amber-400 font-medium">Ormoc City, Leyte</span>
-              </div>
-            </div>
-
-            {/* CEO 2: Alchie M. Ayod */}
-            <div className="rounded-2xl border border-white/10 bg-[#121419] p-6 sm:p-8 flex flex-col justify-between">
-              <div>
-                <div className="flex items-start justify-between">
-                  <div className="h-14 w-14 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 font-display font-extrabold text-xl shadow-inner shadow-amber-400/10">
-                    AA
-                  </div>
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded-md">
-                    Co-CEO & Creative Director
-                  </span>
-                </div>
-
-                <div className="mt-5">
-                  <h4 className="text-xl font-bold font-display text-white">
-                    Alchie M. Ayod
-                  </h4>
-                  <div className="text-xs font-semibold text-amber-300 mt-0.5">
-                    Co-Chief Executive Officer
-                  </div>
-                </div>
-
-                <p className="mt-4 text-xs sm:text-sm text-neutral-300 leading-relaxed font-body">
-                  Leading creative direction, viral video reels, and shelf-ready packaging design. Alchie spearheads on-location visual storytelling across Ormoc, turning traditional local shops into captivating digital brands that stop the social media scroll.
-                </p>
-
-                <div className="mt-5 border-t border-white/5 pt-4 text-xs text-neutral-400 italic">
-                  "We want the passion and hard work you put into your products to be immediately visible the moment anyone sees your brand."
-                </div>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400">
-                <span>Focus: Creative Direction & Video Reels</span>
-                <span className="text-amber-400 font-medium">Ormoc City, Leyte</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

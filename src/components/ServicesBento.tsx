@@ -18,6 +18,7 @@ export const ServicesBento: React.FC<ServicesBentoProps> = ({ onSelectService })
         {/* Section Header */}
         <div className="max-w-2xl">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+            <Layers className="h-3.5 w-3.5 text-amber-400" />
             <span>Capabilities & Deliverables</span>
             <span aria-hidden="true" className="text-white/30">·</span>
             <span>Ormoc City MSME Toolkit</span>

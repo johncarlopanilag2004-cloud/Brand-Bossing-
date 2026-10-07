@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock, ArrowUp } from 'lucide-react';
+import { BossingLogo } from './BossingLogo';
 
 interface FooterProps {
   onOpenBooking: () => void;
@@ -18,18 +19,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           <div className="md:col-span-4 space-y-4">
             <a
               href="#top"
-              className="text-2xl font-extrabold tracking-tight text-white font-display"
+              className="inline-flex items-center transition-opacity hover:opacity-90"
             >
-              Brand<span className="text-amber-400">|</span>Bossing
+              <BossingLogo size="lg" />
             </a>
             <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-sm">
               The premier digital growth, local SEO, and performance marketing agency purpose-built for micro, small, and medium businesses in Ormoc City, Leyte.
             </p>
             <div className="text-xs text-neutral-300">
               <span className="text-neutral-500">Executive Leadership:</span>{' '}
-              <span className="font-semibold text-white">Mark G. Lonzaga</span> &{' '}
-              <span className="font-semibold text-white">Alchie M. Ayod</span>{' '}
-              <span className="text-amber-400 font-mono">(Co-CEOs)</span>
+              <span className="font-semibold text-white">John Carlo P. Panilag</span> <span className="text-amber-400 font-mono">(CEO)</span>,{' '}
+              <span className="font-semibold text-white">Alchie M. Ayod</span> <span className="text-amber-400 font-mono">(COO)</span>,{' '}
+              <span className="font-semibold text-white">Mark G. Lonzaga</span> <span className="text-amber-400 font-mono">(CTO)</span> &{' '}
+              <span className="font-semibold text-white">Raniel A. Pedra</span> <span className="text-amber-400 font-mono">(CGO)</span>
             </div>
             <div className="pt-2">
               <button

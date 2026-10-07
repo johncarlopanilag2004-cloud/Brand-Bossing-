@@ -53,3 +53,15 @@ export interface ConsultationBooking {
   date: string;
   timeSlot: string;
 }
+
+export interface AgencyLeader {
+  rank: number;
+  name: string;
+  role: string;
+  rankTitle: string;
+  initials: string;
+  focus: string;
+  bio: string;
+  quote: string;
+  image?: string;
+}

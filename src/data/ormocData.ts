@@ -1,4 +1,4 @@
-import { ServiceItem, CaseStudyItem, AuditQuestion } from '../types';
+import { ServiceItem, CaseStudyItem, AuditQuestion, AgencyLeader } from '../types';
 import heroImg from '../assets/images/hero_agency_ormoc_1791167368030.jpg';
 import cafeImg from '../assets/images/case_study_cafe_1791167383697.jpg';
 import productImg from '../assets/images/case_study_product_1791167396742.jpg';
@@ -130,7 +130,7 @@ export const CORE_SERVICES: ServiceItem[] = [
     number: '05',
     title: 'High-Speed Web & Digital Ordering Funnels',
     tagline: 'Lightning-fast mobile pages built for local 4G connections and instant orders.',
-    description: 'We build clean, responsive websites optimized for smartphone shoppers with one-tap GCash / Maya payment options, digital menus, and instant WhatsApp / SMS dispatching.',
+    description: 'We build clean, responsive websites optimized for smartphone shoppers with one-tap GCash / Maya payment options, digital menus, and instant Viber / SMS dispatching.',
     outcomes: [
       'Sub-second loading times on smart mobile data networks',
       'Zero monthly platform commission fees compared to commercial delivery apps',
@@ -265,58 +265,23 @@ export const AUDIT_QUESTIONS: AuditQuestion[] = [
 
 export const PACKAGE_TIERS = [
   {
-    id: 'starter',
-    name: 'Ormoc Starter MSME',
-    badge: 'Best for New Startups',
-    monthlyPrice: 12500,
-    setupFee: 4500,
-    ideal: 'New shops, neighborhood cafes, and home-based ventures launching in Ormoc.',
-    features: [
-      'Full Google Business Profile setup, verification & local ranking push',
-      'Hyper-local Facebook & Instagram ad campaign management (up to ₱8k ad spend)',
-      '4 custom branded social media graphics + copy per month',
-      'Automated Messenger greeting & instant FAQ quick-replies',
-      'Monthly performance report & growth consultation call',
-    ],
-    expectedReach: '25,000–35,000 Ormocanons/mo',
-    turnaround: 'Launch in 7–10 days',
-  },
-  {
-    id: 'growth',
-    name: 'Growth Bossing',
-    badge: 'Most Popular Choice',
-    monthlyPrice: 24500,
-    setupFee: 6500,
+    id: 'ormoc-msme-growth',
+    name: 'Ormoc MSME Growth Plan',
+    badge: 'Exclusive All-in-One MSME Offer',
+    monthlyPrice: 2500,
+    setupFee: 0,
     isPopular: true,
-    ideal: 'Established local businesses ready to outrank competitors and scale revenue.',
+    ideal: 'Engineered specifically for Ormoc micro and small businesses—neighborhood cafes, food stalls, retail stores, clinics, water refilling stations, salons, and home-based ventures.',
     features: [
-      'Everything in Starter MSME package',
-      'On-location monthly 4K video shoot in Ormoc (4 edited TikTok/FB Reels)',
-      'Advanced Meta Ads Manager funnels (retargeting visitors & ferry travelers)',
-      'Google Maps 3-Pack rank acceleration + review generation system',
-      'Mobile-optimized 1-page fast ordering or appointment landing page',
-      'Bi-weekly strategy check-in & priority WhatsApp support',
+      'Complete Google Maps & Google Business Profile optimization (top Ormoc local ranking)',
+      'Targeted Facebook & Instagram local ad campaign setup (reaches 15,000+ local buyers)',
+      'Automated Messenger quick-reply menu (replies to inquiries in under 2 minutes 24/7)',
+      'Branded promotional social media graphics & high-converting Bisaya/English ad copy',
+      'Zero setup fee & flexible month-to-month arrangement (no lock-in contracts, cancel anytime)',
+      'Monthly direct growth check-in with the Brand|Bossing executive team',
     ],
-    expectedReach: '50,000–85,000 Ormoc & Leyte buyers/mo',
-    turnaround: 'Launch in 12–14 days',
-  },
-  {
-    id: 'market-leader',
-    name: 'City Market Leader',
-    badge: 'Complete Outsourced Team',
-    monthlyPrice: 42000,
-    setupFee: 9500,
-    ideal: 'Multi-location businesses, high-volume restaurants, resorts, and regional exporters.',
-    features: [
-      'Everything in Growth Bossing package',
-      '2 on-location shoots per month (8 high-impact 4K cinematic reels)',
-      'Full brand identity revamp or packaging dieline redesign (FDA/shelf-ready)',
-      'Omnichannel ad spend management across Google, Meta, and TikTok',
-      'Custom multi-page responsive web platform with payment integration',
-      'Dedicated marketing manager with 24/7 priority emergency response',
-    ],
-    expectedReach: '120,000+ Regional Leyte & Eastern Visayas reach',
-    turnaround: 'Full rollout in 21 days',
+    expectedReach: '15,000–25,000 Ormocanons/mo',
+    turnaround: 'Launch in 3–5 days',
   },
 ];
 
@@ -360,22 +325,46 @@ export const ORMOC_LOCAL_INSIGHTS = [
   },
 ];
 
-export const AGENCY_LEADERSHIP = [
+export const AGENCY_LEADERSHIP: AgencyLeader[] = [
   {
+    rank: 1,
+    name: 'John Carlo P. Panilag',
+    role: 'Chief Executive Officer (CEO)',
+    rankTitle: 'Rank 01 · Chief Executive Officer',
+    initials: 'JP',
+    focus: 'Executive Agency Leadership, Omnichannel Growth & Tech Architecture',
+    bio: 'Serving as the top executive of Brand|Bossing, John Carlo directs the overall agency roadmap, high-level client growth strategies, and automated digital architecture. He ensures every partnered Ormoc business achieves dominant market share, fast conversion funnels, and measurable return on investment.',
+    quote: 'Modern marketing wins through speed, authenticity, and seamless technology. We build digital assets that turn Ormoc traffic into verified paying customers 24/7.',
+  },
+  {
+    rank: 2,
+    name: 'Alchie M. Ayod',
+    role: 'Chief Operating Officer (COO) & Creative Director',
+    rankTitle: 'Rank 02 · Chief Operating Officer',
+    initials: 'AA',
+    focus: 'Creative Operations, On-Site 4K Reels & Brand Identity',
+    bio: 'Overseeing daily agency creative operations, on-location video production, and packaging transformations. Alchie bridges big strategic visions into captivating, scroll-stopping digital content across Ormoc City and Region 8.',
+    quote: 'We want the passion and hard work you put into your products to be immediately visible the moment anyone sees your brand.',
+  },
+  {
+    rank: 3,
     name: 'Mark G. Lonzaga',
-    role: 'Co-CEO & Chief Strategist',
+    role: 'Chief Technology Officer (CTO) & Chief Strategist',
+    rankTitle: 'Rank 03 · Chief Technology Officer',
     initials: 'ML',
     focus: 'Market Positioning, Paid Meta Ads & Strategic ROI',
-    bio: 'Specializing in market positioning, paid advertising funnels, and revenue architecture. Mark oversees growth strategy, client profitability audits, and ensures every Ormoc business partnered with Brand|Bossing achieves tangible return on ad spend.',
+    bio: 'Specializing in market positioning, paid advertising funnels, and revenue architecture. Mark oversees technical ad infrastructure, client profitability audits, and ensures every Ormoc business partnered with Brand|Bossing achieves tangible return on ad spend.',
     quote: 'Our goal is simple: make our homegrown Ormoc businesses the undisputed first choice for locals and visiting tourists alike.',
   },
   {
-    name: 'Alchie M. Ayod',
-    role: 'Co-CEO & Creative Director',
-    initials: 'AA',
-    focus: 'Creative Direction, On-Site 4K Reels & Packaging',
-    bio: 'Leading creative direction, viral video reels, and shelf-ready packaging design. Alchie spearheads on-location visual storytelling across Ormoc, turning traditional local shops into captivating digital brands that stop the social media scroll.',
-    quote: 'We want the passion and hard work you put into your products to be immediately visible the moment anyone sees your brand.',
+    rank: 4,
+    name: 'Raniel A. Pedra',
+    role: 'Chief Growth Officer (CGO) & Client Success',
+    rankTitle: 'Rank 04 · Chief Growth Officer',
+    initials: 'RP',
+    focus: 'Business Development, MSME Partnerships & Account Expansion',
+    bio: 'Heading merchant acquisitions, regional partnerships, and dedicated client success roadmaps. Raniel works on the ground across Leyte to ensure every local entrepreneur achieves consistent, month-over-month revenue expansion.',
+    quote: 'Every business in Ormoc has a unique story. Our commitment is walking alongside local owners to ensure they dominate their category.',
   },
 ];
 

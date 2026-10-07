@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { BossingLogo } from './BossingLogo';
 
 interface NavbarProps {
   onOpenBooking: (prefill?: string) => void;
@@ -11,12 +12,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#0c0d10]/90 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-        {/* Zone 1: Single text element wordmark */}
+        {/* Zone 1: Brand Logo with Executive Arms-Crossed Pose */}
         <a 
           href="#top" 
-          className="text-xl font-extrabold tracking-tight text-white font-display transition-opacity hover:opacity-90"
+          className="transition-opacity hover:opacity-90 inline-flex items-center"
         >
-          Brand<span className="text-amber-400">|</span>Bossing
+          <BossingLogo size="md" />
         </a>
 
         {/* Zone 2: 4-6 clean text navigation links */}

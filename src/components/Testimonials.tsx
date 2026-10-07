@@ -1,5 +1,5 @@
 import React from 'react';
-import { Quote } from 'lucide-react';
+import { Quote, Star } from 'lucide-react';
 import { TESTIMONIALS } from '../data/ormocData';
 
 export const Testimonials: React.FC = () => {
@@ -8,6 +8,7 @@ export const Testimonials: React.FC = () => {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+            <Star className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
             <span>Direct Client Feedback</span>
             <span aria-hidden="true" className="text-white/30">·</span>
             <span>Local Business Voices</span>

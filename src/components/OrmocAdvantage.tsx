@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, MapPin, Compass, Users, Calendar, ShoppingBag } from 'lucide-react';
+import { ChevronDown, MapPin, Compass, Users, Calendar, ShoppingBag, HelpCircle } from 'lucide-react';
 import { ORMOC_LOCAL_INSIGHTS } from '../data/ormocData';
 
 const FAQS = [
@@ -50,6 +50,7 @@ export const OrmocAdvantage: React.FC = () => {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+            <Compass className="h-3.5 w-3.5 text-amber-400" />
             <span>Local Market Intelligence</span>
             <span aria-hidden="true" className="text-white/30">·</span>
             <span>Ormoc City Dynamics</span>
@@ -90,7 +91,13 @@ export const OrmocAdvantage: React.FC = () => {
         {/* FAQ Section */}
         <div className="mt-20 border-t border-white/10 pt-16">
           <div className="max-w-2xl">
-            <h3 className="text-2xl font-bold font-display text-white">
+            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+              <HelpCircle className="h-3.5 w-3.5 text-amber-400" />
+              <span>Common Questions</span>
+              <span aria-hidden="true" className="text-white/30">·</span>
+              <span>Agency FAQ</span>
+            </div>
+            <h3 className="mt-3 text-2xl font-bold font-display text-white">
               Frequently Asked Questions by Ormoc Business Owners
             </h3>
             <p className="mt-2 text-sm text-neutral-400">

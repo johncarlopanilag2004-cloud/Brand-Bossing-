@@ -27,6 +27,7 @@ export const ContactSection: React.FC = () => {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-2xl">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-amber-400 uppercase">
+            <MessageSquare className="h-3.5 w-3.5 text-amber-400" />
             <span>Contact Brand|Bossing</span>
             <span aria-hidden="true" className="text-white/30">·</span>
             <span>Ormoc City Office</span>
@@ -65,7 +66,7 @@ export const ContactSection: React.FC = () => {
                     <Phone className="h-4 w-4" />
                   </div>
                   <div>
-                    <div className="font-semibold text-white">Direct Phone & WhatsApp</div>
+                    <div className="font-semibold text-white">Direct Phone & Viber</div>
                     <div className="text-neutral-400 mt-0.5">+63 917 842 6774 / +63 (053) 561-8900</div>
                   </div>
                 </div>
@@ -91,16 +92,16 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Direct WhatsApp Callout */}
+              {/* Direct Viber Callout */}
               <div className="pt-4 border-t border-white/10">
                 <a
-                  href="https://wa.me/639178426774?text=Hi%20Brand%7CBossing!%20I%20am%20interested%20in%20marketing%20services%20for%20my%20Ormoc%20business."
+                  href="viber://chat?number=%2B639178426774"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 py-3 text-xs font-bold text-emerald-400 hover:bg-emerald-500/20 transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-purple-500/10 border border-purple-500/30 py-3 text-xs font-bold text-purple-400 hover:bg-purple-500/20 transition-colors"
                 >
                   <MessageSquare className="h-4 w-4" />
-                  <span>Chat with Us Directly on WhatsApp</span>
+                  <span>Chat with Us Directly on Viber</span>
                 </a>
               </div>
             </div>
