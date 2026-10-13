@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, Calendar, Clock, MapPin, CheckCircle2, MessageSquare, Download, ArrowRight, ShieldCheck } from 'lucide-react';
 import { ORMOC_BARANGAYS, BUSINESS_TYPES } from '../data/ormocData';
 import { ConsultationBooking } from '../types';
+import { saveLead } from '../services/analyticsStore';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -54,6 +55,21 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, pre
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
+      saveLead({
+        source: 'booking_modal',
+        businessName: formData.businessName || 'Ormoc MSME Client',
+        ownerName: formData.ownerName || 'Business Owner',
+        phone: formData.phone || '',
+        email: formData.email,
+        barangay: formData.barangay || 'Ormoc Centro / Poblacion',
+        businessType: formData.businessType || 'MSME Enterprise',
+        meetingPreference: formData.meetingPreference,
+        date: formData.date,
+        timeSlot: formData.timeSlot,
+        notes: formData.notes,
+        packageInterested: 'Ormoc MSME Growth Plan (₱2,500/mo)',
+        estimatedValue: 2500,
+      });
       setSubmitted(true);
     }
   };

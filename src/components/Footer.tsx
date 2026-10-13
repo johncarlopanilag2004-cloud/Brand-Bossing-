@@ -1,12 +1,13 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock, ArrowUp } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ArrowUp, Lock } from 'lucide-react';
 import { BossingLogo } from './BossingLogo';
 
 interface FooterProps {
   onOpenBooking: () => void;
+  onOpenAdmin: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenAdmin }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -124,6 +125,16 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             © {new Date().getFullYear()} Brand|Bossing Marketing Agency. All rights reserved. Registered in Ormoc City, Leyte.
           </div>
           <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={onOpenAdmin}
+              className="inline-flex items-center gap-1.5 text-neutral-500 hover:text-amber-400 transition-colors font-mono"
+              title="Executive Analytics Console (Password Protected)"
+            >
+              <Lock className="h-3 w-3" />
+              <span>Admin Portal</span>
+            </button>
+            <span aria-hidden="true">·</span>
             <span>DTI & City LGU Compliant</span>
             <span aria-hidden="true">·</span>
             <button

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare } from 'lucide-react';
 import { ORMOC_BARANGAYS, BUSINESS_TYPES } from '../data/ormocData';
+import { saveLead } from '../services/analyticsStore';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,18 @@ export const ContactSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.phone) {
+      saveLead({
+        source: 'contact_form',
+        businessName: formData.businessName || `${formData.name}'s Ormoc Enterprise`,
+        ownerName: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        barangay: formData.barangay,
+        businessType: formData.businessType,
+        notes: formData.message,
+        packageInterested: 'General Inquiry / ₱2,500 MSME Plan',
+        estimatedValue: 2500,
+      });
       setSubmitted(true);
     }
   };

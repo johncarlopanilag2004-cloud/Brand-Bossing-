@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle2, RotateCcw, ArrowRight, AlertCircle, Sparkles } from 'lucide-react';
 import { AUDIT_QUESTIONS } from '../data/ormocData';
+import { saveAudit } from '../services/analyticsStore';
 
 interface AuditToolProps {
   onCompleteAudit: (score: number, report: string) => void;
@@ -13,7 +14,15 @@ export const AuditTool: React.FC<AuditToolProps> = ({ onCompleteAudit }) => {
   const isCompleted = Object.keys(answers).length === AUDIT_QUESTIONS.length;
 
   const handleSelectOption = (questionId: number, optionIndex: number) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: optionIndex }));
+    const nextAnswers = { ...answers, [questionId]: optionIndex };
+    setAnswers(nextAnswers);
+    if (Object.keys(nextAnswers).length === AUDIT_QUESTIONS.length) {
+      const calcScore = Object.entries(nextAnswers).reduce((sum, [qId, optIdx]) => {
+        const q = AUDIT_QUESTIONS.find((item) => item.id === Number(qId));
+        return sum + (q ? q.options[optIdx].score : 0);
+      }, 0);
+      saveAudit(calcScore, 100, calcScore < 40 ? 'Critical Growth Opportunity' : calcScore < 75 ? 'Emerging Local Contender' : 'Ormoc Market Leader', 'Auto-saved diagnostic audit');
+    }
     if (currentStep < AUDIT_QUESTIONS.length - 1) {
       setCurrentStep(currentStep + 1);
     }
