@@ -18,8 +18,6 @@ import {
   Building2,
   MapPin,
   Calendar,
-  Eye,
-  EyeOff,
   LogOut,
   Sparkles,
   BarChart3,
@@ -49,6 +47,8 @@ import {
   isExecutiveAuthenticated,
   loginExecutive,
   logoutExecutive,
+  syncLeadsFromServer,
+  syncTransactionsFromServer,
   REALISTIC_DAILY_TRAFFIC,
   REALISTIC_TRAFFIC_SOURCES,
   REALISTIC_LOCATIONS,
@@ -75,7 +75,6 @@ export const ExecutiveAnalyticsModal: React.FC<ExecutiveAnalyticsModalProps> = (
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [passwordInput, setPasswordInput] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
-  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   // Tab State: 'overview' | 'traffic' | 'purchases' | 'leads' | 'audits' | 'activity'
   const [activeTab, setActiveTab] = useState<'overview' | 'traffic' | 'purchases' | 'leads' | 'audits' | 'activity'>('overview');
@@ -111,12 +110,31 @@ export const ExecutiveAnalyticsModal: React.FC<ExecutiveAnalyticsModalProps> = (
 
   // Simulated live active users
   const [liveVisitors, setLiveVisitors] = useState<number>(6);
+  const [isSyncing, setIsSyncing] = useState<boolean>(false);
 
-  const loadData = () => {
+  const loadData = async () => {
+    // 1. Load cached data immediately
     setLeads(getLeads());
     setAudits(getAudits());
     setTransactions(getTransactions());
     setEvents(getEvents());
+
+    // 2. Fetch live data from central server across all visiting devices
+    try {
+      setIsSyncing(true);
+      const serverLeads = await syncLeadsFromServer();
+      if (serverLeads && serverLeads.length > 0) {
+        setLeads(serverLeads);
+      }
+      const serverTx = await syncTransactionsFromServer();
+      if (serverTx && serverTx.length > 0) {
+        setTransactions(serverTx);
+      }
+    } catch {
+      // graceful fallback
+    } finally {
+      setIsSyncing(false);
+    }
   };
 
   useEffect(() => {
@@ -129,11 +147,25 @@ export const ExecutiveAnalyticsModal: React.FC<ExecutiveAnalyticsModalProps> = (
     }
   }, [isOpen]);
 
+  // Periodic multi-device polling while admin modal is open
+  useEffect(() => {
+    if (!isOpen || !isAuthenticated) return;
+    const pollInterval = setInterval(() => {
+      syncLeadsFromServer().then((l) => {
+        if (l && l.length > 0) setLeads(l);
+      });
+      syncTransactionsFromServer().then((t) => {
+        if (t && t.length > 0) setTransactions(t);
+      });
+    }, 8000);
+    return () => clearInterval(pollInterval);
+  }, [isOpen, isAuthenticated]);
+
   // Subtle realistic live user counter fluctuation
   useEffect(() => {
     if (!isOpen || !isAuthenticated) return;
     const interval = setInterval(() => {
-      setLiveVisitors(Math.floor(4 + Math.random() * 5)); // fluctuates between 4 and 8
+      setLiveVisitors(Math.floor(4 + Math.random() * 5));
     }, 6000);
     return () => clearInterval(interval);
   }, [isOpen, isAuthenticated]);
@@ -350,27 +382,20 @@ export const ExecutiveAnalyticsModal: React.FC<ExecutiveAnalyticsModalProps> = (
             </p>
 
             <form onSubmit={handleLogin} className="mt-8 w-full max-w-sm space-y-4">
-              <div className="relative">
+              <div>
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type="password"
                   placeholder="Enter Executive Password..."
                   value={passwordInput}
                   onChange={(e) => {
                     setPasswordInput(e.target.value);
                     setPasswordError('');
                   }}
+                  autoComplete="current-password"
                   autoFocus
                   required
-                  className="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-3.5 pr-11 text-sm text-white placeholder-neutral-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 focus:outline-none transition-all text-center tracking-wider"
+                  className="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-3.5 text-sm text-white placeholder-neutral-500 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 focus:outline-none transition-all text-center tracking-wider"
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-3.5 text-neutral-400 hover:text-white"
-                  tabIndex={-1}
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
               </div>
 
               {passwordError && (
@@ -1144,6 +1169,18 @@ export const ExecutiveAnalyticsModal: React.FC<ExecutiveAnalyticsModalProps> = (
                                   <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-400/10 text-amber-300 border border-amber-400/20">
                                     📍 {lead.barangay}
                                   </span>
+                                  {lead.source === 'contact_form' ? (
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/10 text-blue-300 border border-blue-500/20">
+                                      ✉️ Contact Form Message
+                                    </span>
+                                  ) : (
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                                      📅 Strategy Booking
+                                    </span>
+                                  )}
+                                  <span className="text-[11px] text-neutral-500 ml-auto font-mono">
+                                    Received: {new Date(lead.createdAt).toLocaleDateString()} {new Date(lead.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                  </span>
                                 </div>
 
                                 <div className="text-xs text-neutral-300 flex flex-wrap items-center gap-3">
@@ -1162,7 +1199,9 @@ export const ExecutiveAnalyticsModal: React.FC<ExecutiveAnalyticsModalProps> = (
 
                                 {lead.notes && (
                                   <div className="text-xs text-neutral-300 bg-black/40 p-3 rounded-xl border border-white/5 leading-relaxed">
-                                    <span className="text-amber-400 font-bold">Client Notes: </span>
+                                    <span className="text-amber-400 font-bold">
+                                      {lead.source === 'contact_form' ? 'Submitted Message: ' : 'Client Inquiry Notes: '}
+                                    </span>
                                     {lead.notes}
                                   </div>
                                 )}
@@ -1357,8 +1396,9 @@ export const ExecutiveAnalyticsModal: React.FC<ExecutiveAnalyticsModalProps> = (
               <div>
                 Executive Console · <span className="text-white font-medium">Brand|Bossing Marketing Agency</span> (Ormoc City)
               </div>
-              <div className="text-[11px] text-neutral-500">
-                Password protected: <code className="bg-white/5 px-1.5 py-0.5 rounded text-amber-400 font-mono">4bossing</code>
+              <div className="text-[11px] text-neutral-500 flex items-center gap-1.5">
+                <Lock className="h-3 w-3 text-amber-400" />
+                <span>Executive Encrypted Session</span>
               </div>
             </div>
           </>

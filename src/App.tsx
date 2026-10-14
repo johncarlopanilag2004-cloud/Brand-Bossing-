@@ -114,7 +114,7 @@ export default function App() {
         prefillNotes={prefillNotes}
       />
 
-      {/* Executive Analytics & Inquiries Portal (Password: 4bossing) */}
+      {/* Executive Analytics & Inquiries Portal */}
       <ExecutiveAnalyticsModal
         isOpen={adminModalOpen}
         onClose={() => {

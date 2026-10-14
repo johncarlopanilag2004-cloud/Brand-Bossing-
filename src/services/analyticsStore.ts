@@ -17,11 +17,24 @@ const SESSION_AUTH_KEY = 'brandbossing_exec_auth';
 
 export const ADMIN_PASSWORD = '4bossing';
 
+// Cloud Run live backend URL for cross-device synchronization when hosted on Netlify or custom domains
+export const CLOUD_BACKEND_ORIGIN = 'https://ais-pre-zcnaex7pfnmj4gv27ezbs7-347535609061.asia-east1.run.app';
+
+export function getApiBase(): string {
+  if (typeof window === 'undefined') return '';
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1' || host.includes('run.app')) {
+    return '';
+  }
+  // When running on Netlify or external web host, route API requests to the live Cloud Run backend
+  return CLOUD_BACKEND_ORIGIN;
+}
+
 const SEED_LEADS: LeadRecord[] = [
   {
     id: 'lead-ormoc-101',
     source: 'booking_modal',
-    createdAt: new Date(Date.now() - 1000 * 60 * 35).toISOString(), // 35 mins ago
+    createdAt: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
     businessName: 'The Backyard Grind Cafe',
     ownerName: 'Kristine Mae Alcantara',
     phone: '0917 842 1993',
@@ -40,7 +53,7 @@ const SEED_LEADS: LeadRecord[] = [
   {
     id: 'lead-ormoc-102',
     source: 'package_cta',
-    createdAt: new Date(Date.now() - 1000 * 60 * 180).toISOString(), // 3 hrs ago
+    createdAt: new Date(Date.now() - 1000 * 60 * 180).toISOString(),
     businessName: 'Valencia Queen Pineapple Delicacies',
     ownerName: 'Eduardo Gomez',
     phone: '0928 554 9012',
@@ -59,7 +72,7 @@ const SEED_LEADS: LeadRecord[] = [
   {
     id: 'lead-ormoc-103',
     source: 'audit_tool',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 18).toISOString(), // 18 hrs ago
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 18).toISOString(),
     businessName: 'Ormoc Precision Dental Clinic',
     ownerName: 'Dr. Raymond Chu, DMD',
     phone: '0919 778 3211',
@@ -78,7 +91,7 @@ const SEED_LEADS: LeadRecord[] = [
   {
     id: 'lead-ormoc-104',
     source: 'contact_form',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 42).toISOString(), // 2 days ago
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 42).toISOString(),
     businessName: 'Linao Moto Parts & Supply',
     ownerName: 'Carlos Tan',
     phone: '0995 120 4455',
@@ -97,7 +110,7 @@ const SEED_LEADS: LeadRecord[] = [
   {
     id: 'lead-ormoc-105',
     source: 'booking_modal',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 70).toISOString(), // 3 days ago
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 70).toISOString(),
     businessName: 'Camp Downes Marine & Fishing Gear',
     ownerName: 'Felipe "Tata" Alcantara',
     phone: '0917 334 1188',
@@ -107,7 +120,7 @@ const SEED_LEADS: LeadRecord[] = [
     meetingPreference: 'in-person',
     date: '2026-10-11',
     timeSlot: '11:00 AM – 11:45 AM',
-    notes: 'Supplying fisherfolk and boat owners across Ormoc and Merida. Want to be listed on Google Maps.',
+    notes: 'Supplying boat owners across Ormoc. Want to be listed on Google Maps.',
     packageInterested: 'Ormoc MSME Growth Plan (₱2,500/mo)',
     status: 'closed_client',
     adminNotes: 'Retainer active. GCash payment received.',
@@ -145,7 +158,6 @@ const SEED_AUDITS: AuditSubmission[] = [
   },
 ];
 
-// Realistic Verified MSME Client Purchases (Subscriptions to ₱2,500/mo plan)
 const SEED_TRANSACTIONS: TransactionRecord[] = [
   {
     id: 'tx-2026-009',
@@ -231,51 +243,8 @@ const SEED_TRANSACTIONS: TransactionRecord[] = [
     status: 'Paid & Active',
     nextRenewalDate: '2026-11-03',
   },
-  {
-    id: 'tx-2026-003',
-    date: '2026-10-01',
-    clientBusiness: 'Can-adieng Modern Laundry Hub',
-    clientOwner: 'Bea Villanueva',
-    barangay: 'Can-adieng',
-    planName: 'Ormoc MSME Growth Plan',
-    amount: 2500,
-    paymentMethod: 'GCash',
-    referenceNo: 'GCASH-66381920',
-    orNumber: 'OR-BB-2026-083',
-    status: 'Paid & Active',
-    nextRenewalDate: '2026-11-01',
-  },
-  {
-    id: 'tx-2026-002',
-    date: '2026-09-28',
-    clientBusiness: 'Tambulilid Fresh Meat Hub',
-    clientOwner: 'Jovencio "Boy" Tan',
-    barangay: 'Tambulilid',
-    planName: 'Ormoc MSME Growth Plan',
-    amount: 2500,
-    paymentMethod: 'Cash (Office)',
-    referenceNo: 'CASH-REC-0082',
-    orNumber: 'OR-BB-2026-082',
-    status: 'Paid & Active',
-    nextRenewalDate: '2026-10-28',
-  },
-  {
-    id: 'tx-2026-001',
-    date: '2026-09-25',
-    clientBusiness: 'Alegria Pure Water Refilling',
-    clientOwner: 'Renato Dela Cruz',
-    barangay: 'Alegria',
-    planName: 'Ormoc MSME Growth Plan',
-    amount: 2500,
-    paymentMethod: 'GCash',
-    referenceNo: 'GCASH-88392019',
-    orNumber: 'OR-BB-2026-081',
-    status: 'Paid & Active',
-    nextRenewalDate: '2026-10-25',
-  },
 ];
 
-// Realistic 7-Day Traffic Breakdown for Brand|Bossing (Ormoc City & Leyte Region)
 export const REALISTIC_DAILY_TRAFFIC: DailyTraffic[] = [
   { day: 'Mon, Oct 6', pageViews: 142, uniqueVisitors: 89, inquiries: 3 },
   { day: 'Tue, Oct 7', pageViews: 168, uniqueVisitors: 98, inquiries: 4 },
@@ -300,7 +269,6 @@ export const REALISTIC_LOCATIONS: TrafficLocation[] = [
   { location: 'Cebu Travelers (Fast Ferry Port Arrival)', percentage: 6, visitors: 126 },
 ];
 
-// Helper to safely get from localStorage
 function getStored<T>(key: string, defaultValue: T): T {
   if (typeof window === 'undefined') return defaultValue;
   try {
@@ -321,11 +289,82 @@ function setStored<T>(key: string, value: T): void {
   }
 }
 
-// Leads API
+// Multi-Device Global Cloud Bucket for cross-device synchronization
+const KVDB_BUCKET_URL = 'https://kvdb.io/3iaQWxNQksRT3oo8Vdf21t';
+
+// Multi-Device Leads Synchronization
 export function getLeads(): LeadRecord[] {
   return getStored<LeadRecord[]>(LEADS_STORAGE_KEY, SEED_LEADS);
 }
 
+// Sync leads from central backend and global cloud database across ALL devices
+export async function syncLeadsFromServer(): Promise<LeadRecord[]> {
+  const localLeads = getLeads();
+  const leadMap = new Map<string, LeadRecord>();
+
+  // 1. Seed with local leads
+  localLeads.forEach((l) => leadMap.set(l.id, l));
+
+  // 2. Fetch from Express backend /api/leads if available
+  try {
+    const api = getApiBase();
+    const res = await fetch(`${api}/api/leads`, {
+      method: 'GET',
+      headers: { Accept: 'application/json' },
+    });
+    if (res.ok) {
+      const serverLeads = await res.json();
+      if (Array.isArray(serverLeads)) {
+        serverLeads.forEach((l: LeadRecord) => {
+          if (l && l.id) leadMap.set(l.id, l);
+        });
+      }
+    }
+  } catch {
+    // Backend fetch failed or offline; continue to cloud sync
+  }
+
+  // 3. Fetch from global cloud database (kvdb.io) for cross-device sync on all networks
+  try {
+    const kvRes = await fetch(`${KVDB_BUCKET_URL}/?format=json&prefix=lead_`, {
+      method: 'GET',
+    });
+    if (kvRes.ok) {
+      const keys: string[] = await kvRes.json();
+      if (Array.isArray(keys) && keys.length > 0) {
+        // Fetch any remote leads in parallel (up to 25 recent keys)
+        const recentKeys = keys.slice(-25);
+        await Promise.all(
+          recentKeys.map(async (key) => {
+            try {
+              const itemRes = await fetch(`${KVDB_BUCKET_URL}/${key}`);
+              if (itemRes.ok) {
+                const remoteLead: LeadRecord = await itemRes.json();
+                if (remoteLead && remoteLead.id) {
+                  leadMap.set(remoteLead.id, remoteLead);
+                }
+              }
+            } catch {}
+          })
+        );
+      }
+    }
+  } catch {
+    // Cloud sync notice: use merged cache
+  }
+
+  const merged = Array.from(leadMap.values()).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
+  if (merged.length > 0) {
+    setStored(LEADS_STORAGE_KEY, merged);
+  }
+
+  return merged;
+}
+
+// Saves lead locally AND pushes to central server + cloud database so ALL devices see this message
 export function saveLead(leadData: Omit<LeadRecord, 'id' | 'createdAt' | 'status'>): LeadRecord {
   const currentLeads = getLeads();
   const newLead: LeadRecord = {
@@ -335,36 +374,114 @@ export function saveLead(leadData: Omit<LeadRecord, 'id' | 'createdAt' | 'status
     status: 'new',
     estimatedValue: leadData.estimatedValue || 2500,
   };
+
+  // 1. Instant local persistence for zero submit lag on the client's device
   const updated = [newLead, ...currentLeads];
   setStored(LEADS_STORAGE_KEY, updated);
   recordEvent('lead_submitted', `${newLead.businessName} (${newLead.barangay})`);
+
+  // 2. Transmit to Express backend server
+  try {
+    const api = getApiBase();
+    fetch(`${api}/api/leads`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newLead),
+    }).catch(() => {});
+  } catch {}
+
+  // 3. Transmit to global cloud database so EVERY other device (mobile, laptop, admin) receives it immediately
+  try {
+    fetch(`${KVDB_BUCKET_URL}/lead_${newLead.id}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newLead),
+    }).catch(() => {});
+  } catch {}
+
   return newLead;
 }
 
 export function updateLeadStatus(id: string, status: LeadStatus, adminNotes?: string): void {
   const currentLeads = getLeads();
+  let updatedLead: LeadRecord | null = null;
   const updated = currentLeads.map((lead) => {
     if (lead.id === id) {
-      return {
+      updatedLead = {
         ...lead,
         status,
         adminNotes: adminNotes !== undefined ? adminNotes : lead.adminNotes,
       };
+      return updatedLead;
     }
     return lead;
   });
   setStored(LEADS_STORAGE_KEY, updated);
+
+  // Sync update to Express backend
+  try {
+    const api = getApiBase();
+    fetch(`${api}/api/leads/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, adminNotes }),
+    }).catch(() => {});
+  } catch {}
+
+  // Sync update to global cloud database
+  if (updatedLead) {
+    try {
+      fetch(`${KVDB_BUCKET_URL}/lead_${id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedLead),
+      }).catch(() => {});
+    } catch {}
+  }
 }
 
 export function deleteLead(id: string): void {
   const currentLeads = getLeads();
   const updated = currentLeads.filter((l) => l.id !== id);
   setStored(LEADS_STORAGE_KEY, updated);
+
+  // Sync delete to Express backend
+  try {
+    const api = getApiBase();
+    fetch(`${api}/api/leads/${id}`, {
+      method: 'DELETE',
+    }).catch(() => {});
+  } catch {}
+
+  // Sync delete to global cloud database
+  try {
+    fetch(`${KVDB_BUCKET_URL}/lead_${id}`, {
+      method: 'DELETE',
+    }).catch(() => {});
+  } catch {}
 }
 
 // Transactions & Purchases API
 export function getTransactions(): TransactionRecord[] {
   return getStored<TransactionRecord[]>(TRANSACTIONS_STORAGE_KEY, SEED_TRANSACTIONS);
+}
+
+export async function syncTransactionsFromServer(): Promise<TransactionRecord[]> {
+  try {
+    const api = getApiBase();
+    const res = await fetch(`${api}/api/transactions`, {
+      method: 'GET',
+      headers: { Accept: 'application/json' },
+    });
+    if (res.ok) {
+      const serverTx: TransactionRecord[] = await res.json();
+      if (Array.isArray(serverTx) && serverTx.length > 0) {
+        setStored(TRANSACTIONS_STORAGE_KEY, serverTx);
+        return serverTx;
+      }
+    }
+  } catch {}
+  return getTransactions();
 }
 
 export function recordTransaction(data: Omit<TransactionRecord, 'id'>): TransactionRecord {
@@ -376,6 +493,26 @@ export function recordTransaction(data: Omit<TransactionRecord, 'id'>): Transact
   const updated = [newTx, ...currentTx];
   setStored(TRANSACTIONS_STORAGE_KEY, updated);
   recordEvent('package_click', `Client payment recorded: ${newTx.clientBusiness} (₱${newTx.amount})`);
+
+  // Sync to Express backend
+  try {
+    const api = getApiBase();
+    fetch(`${api}/api/transactions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newTx),
+    }).catch(() => {});
+  } catch {}
+
+  // Sync to global cloud database
+  try {
+    fetch(`${KVDB_BUCKET_URL}/tx_${newTx.id}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newTx),
+    }).catch(() => {});
+  } catch {}
+
   return newTx;
 }
 
@@ -397,6 +534,17 @@ export function saveAudit(score: number, maxScore: number, level: string, priori
   };
   setStored(AUDITS_STORAGE_KEY, [newAudit, ...currentAudits]);
   recordEvent('audit_completed', `Score: ${score}/${maxScore} (${level})`);
+
+  // Sync to backend
+  try {
+    const api = getApiBase();
+    fetch(`${api}/api/audits`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newAudit),
+    }).catch(() => {});
+  } catch {}
+
   return newAudit;
 }
 
